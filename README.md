@@ -1,6 +1,6 @@
 # DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification
 
-Created by Yongming Rao, Wenliang Zhao, Benlin Liu, Jiwen Lu, Jie Zhou, Cho-Jui Hsieh
+Created by [Yongming Rao](https://raoyongming.github.io/), [Wenliang Zhao](https://thu-jw.github.io/), [Benlin Liu](https://liubl1217.github.io/), [Jiwen Lu](https://scholar.google.com/citations?user=TN8uDQoAAAAJ&hl=en&authuser=1), [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Cho-Jui Hsieh](http://web.cs.ucla.edu/~chohsieh/)
 
 This repository contains PyTorch implementation for DynamicViT.
 
@@ -10,7 +10,9 @@ We introduce a dynamic token sparsification framework to prune redundant tokens 
 
 Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch-image-models), [DeiT](https://github.com/facebookresearch/deit) and [LV-ViT](https://github.com/zihangJiang/TokenLabeling)
 
-[[Project]](https://dynamicvit.ivg-research.xyz/)
+[[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv]](https://arxiv.org/abs/2106.02034)
+
+
 
 ## Usage
 
@@ -49,17 +51,17 @@ To train DynamicViT models on ImageNet, run:
 
 DeiT-small
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_deit-small --arch deit_small --input-size 224 --batch-size 96 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill  --base_rate 0.7
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_deit-small --arch deit_small --input-size 224 --batch-size 96 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
 ```
 
 LV-ViT-S
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-s --arch lvvit_s --input-size 224 --batch-size 64 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill  --base_rate 0.7
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-s --arch lvvit_s --input-size 224 --batch-size 64 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
 ```
 
 LV-ViT-M
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-m --arch lvvit_m --input-size 224 --batch-size 48 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill  --base_rate 0.7
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-m --arch lvvit_m --input-size 224 --batch-size 48 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
 ```
 
 ## License

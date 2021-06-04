@@ -66,3 +66,14 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit
 
 ## License
 MIT License
+
+## Citation
+If you find our work useful in your research, please consider citing:
+```
+@article{rao2021dynamicvit,
+  title={DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification},
+  author={Rao, Yongming and Zhao, Wenliang and Liu, Benlin and Lu, Jiwen and Jie, Zhou and Cho-Jui, Hsieh},
+  journal={arXiv preprint arXiv:2106.02034},
+  year={2021}
+}
+```

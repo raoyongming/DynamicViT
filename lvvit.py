@@ -549,7 +549,7 @@ class LVViTDiffPruning(nn.Module):
     def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0.,
                  drop_path_rate=0., drop_path_decay='linear', hybrid_backbone=None, norm_layer=nn.LayerNorm, p_emb='4_2', head_dim = None,
-                 skip_lam = 1.0,order=None, mix_token=False, return_dense=False, pruning_loc=None, token_ratio=None, distill=False):
+                 skip_lam = 1.0,order=None, mix_token=False, return_dense=False, pruning_loc=None, token_ratio=None, distill=False, viz_mode=False):
         super().__init__()
         self.num_classes = num_classes
         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
@@ -610,6 +610,7 @@ class LVViTDiffPruning(nn.Module):
             assert return_dense, "always return all features when mixtoken is enabled"
 
         self.distill = distill
+        self.viz_mode = viz_mode
 
         trunc_normal_(self.pos_embed, std=.02)
         trunc_normal_(self.cls_token, std=.02)
@@ -654,6 +655,8 @@ class LVViTDiffPruning(nn.Module):
         init_n = 14 * 14
         prev_decision = torch.ones(B, init_n, 1, dtype=x.dtype, device=x.device)
         policy = torch.ones(B, init_n + 1, 1, dtype=x.dtype, device=x.device)
+        if self.viz_mode:
+            decisions = [[] for _ in self.pruning_loc]
         for i, blk in enumerate(self.blocks):
             if i in self.pruning_loc:
                 spatial_x = x[:, 1:]
@@ -669,6 +672,8 @@ class LVViTDiffPruning(nn.Module):
                     score = pred_score[:,:,0]
                     num_keep_node = int(init_n * self.token_ratio[p_count])
                     keep_policy = torch.argsort(score, dim=1, descending=True)[:, :num_keep_node]
+                    if self.viz_mode:
+                        decisions[p_count].append(keep_policy)
                     cls_policy = torch.zeros(B, 1, dtype=keep_policy.dtype, device=keep_policy.device)
                     now_policy = torch.cat([cls_policy, keep_policy + 1], dim=1)
                     x = batch_index_select(x, now_policy)
@@ -692,7 +697,10 @@ class LVViTDiffPruning(nn.Module):
             else:
                 return final_pred, out_pred_prob
         else:
-            return final_pred
+            if self.viz_mode:
+                return final_pred, decisions
+            else:
+                return final_pred
 
 class LVViT_Teacher(nn.Module):
     """ Vision Transformer with tricks

@@ -12,7 +12,16 @@ Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch
 
 [[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv]](https://arxiv.org/abs/2106.02034)
 
+## Model Zoo
 
+We provide our DynamicViT models pretrained on ImageNet
+| name | arch | rho | acc@1 | acc@5 | GFLOPs | url |
+| --- | --- | --- | --- | --- | --- | --- |
+| DynamicViT-256/0.7 | ```deit_256``` | 0.7 | 76.532 | 93.118 | 1.3 | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) |
+| DynamicViT-384/0.7 | ```deit_small``` | 0.7 | 79.316 | 94.676 | 2.9 | [Google Drive](https://drive.google.com/file/d/1H5kHHagdqo4emk9CgjfA7DA62XJr8Yc1/view?usp=sharing) |
+| DynamicViT-LV-S/0.5 | ```lvvit_s``` | 0.5 | 81.970 | 95.756 | 3.7 | [Google Drive](https://drive.google.com/file/d/1kPe3MhtYHNdG7natrU20xcAqodO6-Z58/view?usp=sharing) |
+| DynamicViT-LV-S/0.7 | ```lvvit_s``` | 0.7 | 83.076 | 96.252 | 4.6 | [Google Drive](https://drive.google.com/file/d/1dNloEsuEiTi592SdM_ELC36kOJ7aaF-3/view?usp=sharing) |
+| DynamicViT-LV-M/0.7 | ```lvvit_m``` | 0.7 | 83.816 | 96.584 | 8.5 | [Google Drive](https://drive.google.com/file/d/1dNab1B5ZOTVNpnpO6H1TsXKFM8BAlA3I/view?usp=sharing) |
 
 ## Usage
 
@@ -22,7 +31,7 @@ Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch
 - torchvision>=0.8.1
 - timm==0.4.5
 
-Data preparation: Download and extract ImageNet images from http://image-net.org/. The directory structure should be
+Data preparation: download and extract ImageNet images from http://image-net.org/. The directory structure should be
 
 ```
 │ILSVRC2012/
@@ -40,12 +49,27 @@ Data preparation: Download and extract ImageNet images from http://image-net.org
 │  ├── ......
 ```
 
-Model preparation: Download pre-trained DeiT and LV-ViT models:
+Model preparation: download pre-trained DeiT and LV-ViT models for training DynamicViT:
 ```
 sh download_pretrain.sh
 ```
 
-### Training & evaluation
+### Demo
+
+We provide a [Jupyter notebook](https://github.com/raoyongming/DynamicViT/blob/master/example.ipynb) where you can run the demo and visualization of DynamicViT.
+
+![demo](figs/demo.png)
+
+### Evaluate
+
+To evaluate a pre-trained DynamicViT model on ImageNet val with a single GPU, run:
+
+```
+python infer.py --data-path /path/to/ILSVRC2012/ --arch arch_name --model-path /path/to/model --base_rate 0.7 
+```
+
+
+### Training
 
 To train DynamicViT models on ImageNet, run:
 
@@ -72,7 +96,7 @@ If you find our work useful in your research, please consider citing:
 ```
 @article{rao2021dynamicvit,
   title={DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification},
-  author={Rao, Yongming and Zhao, Wenliang and Liu, Benlin and Lu, Jiwen and Jie, Zhou and Cho-Jui, Hsieh},
+  author={Rao, Yongming and Zhao, Wenliang and Liu, Benlin and Lu, Jiwen and Zhou, Jie and Hsieh, Cho-Jui},
   journal={arXiv preprint arXiv:2106.02034},
   year={2021}
 }

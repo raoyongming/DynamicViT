@@ -60,7 +60,7 @@ We provide a [Jupyter notebook](https://github.com/raoyongming/DynamicViT/blob/m
 
 ![demo](figs/demo.png)
 
-### Evaluate
+### Evaluation
 
 To evaluate a pre-trained DynamicViT model on ImageNet val with a single GPU, run:
 

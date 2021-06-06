@@ -56,7 +56,9 @@ sh download_pretrain.sh
 
 ### Demo
 
-We provide a [Jupyter notebook](https://github.com/raoyongming/DynamicViT/blob/master/viz_example.ipynb) where you can run the demo and visualization of DynamicViT.
+We provide a [Jupyter notebook](https://github.com/raoyongming/DynamicViT/blob/master/viz_example.ipynb) where you can run the visualization of DynamicViT.
+
+To run the demo, you need to install ```matplotlib```.
 
 ![demo](figs/demo.png)
 

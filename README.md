@@ -14,7 +14,7 @@ Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch
 
 ## Model Zoo
 
-We provide our DynamicViT models pretrained on ImageNet
+We provide our DynamicViT models pretrained on ImageNet:
 | name | arch | rho | acc@1 | acc@5 | GFLOPs | url |
 | --- | --- | --- | --- | --- | --- | --- |
 | DynamicViT-256/0.7 | ```deit_256``` | 0.7 | 76.532 | 93.118 | 1.3 | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ebda4114758f44d78bc0/?dl=1) |
@@ -89,6 +89,8 @@ LV-ViT-M
 ```
 python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-m --arch lvvit_m --input-size 224 --batch-size 48 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
 ```
+
+You can train models with different keeping ratio by adjusting ```base_rate```. DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy). 
 
 ## License
 MIT License

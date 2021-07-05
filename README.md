@@ -31,7 +31,7 @@ We provide our DynamicViT models pretrained on ImageNet:
 - torchvision>=0.8.1
 - timm==0.4.5
 
-Data preparation: download and extract ImageNet images from http://image-net.org/. The directory structure should be
+**Data preparation**: download and extract ImageNet images from http://image-net.org/. The directory structure should be
 
 ```
 │ILSVRC2012/
@@ -49,7 +49,7 @@ Data preparation: download and extract ImageNet images from http://image-net.org
 │  ├── ......
 ```
 
-Model preparation: download pre-trained DeiT and LV-ViT models for training DynamicViT:
+**Model preparation**: download pre-trained DeiT and LV-ViT models for training DynamicViT:
 ```
 sh download_pretrain.sh
 ```
@@ -64,7 +64,7 @@ To run the demo, you need to install ```matplotlib```.
 
 ### Evaluation
 
-To evaluate a pre-trained DynamicViT model on ImageNet val with a single GPU, run:
+To evaluate a pre-trained DynamicViT model on the ImageNet validation set with a single GPU, run:
 
 ```
 python infer.py --data-path /path/to/ILSVRC2012/ --arch arch_name --model-path /path/to/model --base_rate 0.7 
@@ -90,7 +90,7 @@ LV-ViT-M
 python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-m --arch lvvit_m --input-size 224 --batch-size 48 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
 ```
 
-You can train models with different keeping ratio by adjusting ```base_rate```. DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy). 
+You can train models with different keeping ratio by adjusting ```base_rate```. DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy compared to 30 epochs). 
 
 ## License
 MIT License

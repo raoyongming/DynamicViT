@@ -50,9 +50,14 @@ We provide our DynamicViT models pretrained on ImageNet:
 ```
 
 **Model preparation**: download pre-trained DeiT and LV-ViT models for training DynamicViT:
-```
-sh download_pretrain.sh
-```
+| model | url |
+| --- | --- | 
+| DeiT-Small | [link](https://dl.fbaipublicfiles.com/deit/deit_small_patch16_224-cd65a155.pth) |
+| LVViT-S | [Google Drive](https://drive.google.com/file/d/1OSQ3l1yoz5YbsvHy3VjLoipR4jFHFOIS/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/544d651ec2a14da0a37c/?dl=1) |
+| LVViT-S | [Google Drive](https://drive.google.com/file/d/1iZc6d27EuEnlfUpJoNhsZEkt6GVgPy7-/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/c690596b7ead4813ad0b/?dl=1) |
+
+Since the original link of LVViT models are not avaiable now, we provide the models used in our experiments on Google Drive and Tsinghua Cloud.
+
 
 ### Demo
 

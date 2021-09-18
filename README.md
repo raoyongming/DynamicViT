@@ -56,7 +56,7 @@ We provide our DynamicViT models pretrained on ImageNet:
 | LVViT-S | [Google Drive](https://drive.google.com/file/d/1OSQ3l1yoz5YbsvHy3VjLoipR4jFHFOIS/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/544d651ec2a14da0a37c/?dl=1) |
 | LVViT-M | [Google Drive](https://drive.google.com/file/d/1iZc6d27EuEnlfUpJoNhsZEkt6GVgPy7-/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/c690596b7ead4813ad0b/?dl=1) |
 
-Since the original link of LVViT models are not available now, we provide the models used in our experiments on Google Drive and Tsinghua Cloud.
+Since the original link of LVViT models are not available now ([#4](https://github.com/raoyongming/DynamicViT/issues/4)), we provide the models used in our experiments on Google Drive and Tsinghua Cloud.
 
 
 ### Demo

@@ -2,7 +2,7 @@
 
 Created by [Yongming Rao](https://raoyongming.github.io/), [Wenliang Zhao](https://thu-jw.github.io/), [Benlin Liu](https://liubl1217.github.io/), [Jiwen Lu](https://scholar.google.com/citations?user=TN8uDQoAAAAJ&hl=en&authuser=1), [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Cho-Jui Hsieh](http://web.cs.ucla.edu/~chohsieh/)
 
-This repository contains PyTorch implementation for DynamicViT.
+This repository contains PyTorch implementation for DynamicViT (NeurIPS 2021).
 
 We introduce a dynamic token sparsification framework to prune redundant tokens in vision transformers progressively and dynamically based on the input:
 
@@ -103,10 +103,10 @@ MIT License
 ## Citation
 If you find our work useful in your research, please consider citing:
 ```
-@article{rao2021dynamicvit,
+@inproceedings{rao2021dynamicvit,
   title={DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification},
   author={Rao, Yongming and Zhao, Wenliang and Liu, Benlin and Lu, Jiwen and Zhou, Jie and Hsieh, Cho-Jui},
-  journal={arXiv preprint arXiv:2106.02034},
-  year={2021}
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year = {2021}
 }
 ```

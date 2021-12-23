@@ -64,7 +64,7 @@ Since the original links of LVViT models are not available now ([#4](https://git
 
 ### Demo
 
-You can try DynamicViT on Colab [![][colab]][colab-dynamicvit]. Thanks [@dirtycomputer](https://github.com/dirtycomputer) for the contribution.  
+You can try DynamicViT on Colab [![][colab]][colab-dynamicvit]. Thank [@dirtycomputer](https://github.com/dirtycomputer) for the contribution.  
 
 [colab]: <https://colab.research.google.com/assets/colab-badge.svg>
 [colab-dynamicvit]: <https://colab.research.google.com/github/raoyongming/DynamicViT/blob/master/colab_demo.ipynb>

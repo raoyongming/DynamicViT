@@ -250,5 +250,10 @@ If you find our work useful in your research, please consider citing:
 ```
 
 ```
-
+@article{rao2022dynamicvit,
+  title={Dynamic Spatial Sparsification for Efficient Vision Transformers and Convolutional Neural Networks},
+  author={Rao, Yongming and Liu, Zuyan and Zhao, Wenliang and Zhou, Jie and Lu, Jiwen},
+  journal={arXiv preprint},
+  year={2022}
+}
 ```

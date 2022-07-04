@@ -1,38 +1,65 @@
-# DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification
-
-Created by [Yongming Rao](https://raoyongming.github.io/), [Wenliang Zhao](https://thu-jw.github.io/), [Benlin Liu](https://liubl1217.github.io/), [Jiwen Lu](https://scholar.google.com/citations?user=TN8uDQoAAAAJ&hl=en&authuser=1), [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Cho-Jui Hsieh](http://web.cs.ucla.edu/~chohsieh/)
+# Efficient Vision Transformers and CNNs with Dynamic Spatial Sparsification
 
 This repository contains PyTorch implementation for DynamicViT (NeurIPS 2021).
 
-DynamicViT is a dynamic token sparsification framework to prune redundant tokens in vision transformers progressively and dynamically based on the input. Our method
-can reduces over **30%** FLOPs and improves the throughput by over **40%** while the drop of accuracy is within **0.5%** for various vision transformers
+**DynamicViT** is a dynamic token sparsification framework to prune redundant tokens in vision transformers progressively and dynamically based on the input. Our method can reduces over **30%** FLOPs and improves the throughput by over **40%** while the drop of accuracy is within **0.5%** for various vision transformers.
+
+[[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv (NeurIPS 2021 paper)]](https://arxiv.org/abs/2106.02034)
+
+### 🔥Updates
+
+We extend our method to more **network architectures** (i.e., ConvNeXt and Swin Transformers) and more **tasks** (i.e., object detection and semantic segmentation) with an improved ***dynamic spatial sparsification*** framework. Please refer to the extended version of our paper for details.
+
+[[arXiv (Extended Version)]]()
+
+### Image Examples
 
 ![intro](figs/intro.gif)
 
+---
 
+### Video Examples
 
-Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch-image-models), [DeiT](https://github.com/facebookresearch/deit) and [LV-ViT](https://github.com/zihangJiang/TokenLabeling)
+![result1](figs/video.gif)
 
-[[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv]](https://arxiv.org/abs/2106.02034)
 
 ## Model Zoo
 
 We provide our DynamicViT models pretrained on ImageNet:
-| name | arch | rho | acc@1 | acc@5 | FLOPs | url |
+| name | model | rho | acc@1 | acc@5 | FLOPs | url |
 | --- | --- | --- | --- | --- | --- | --- |
-| DynamicViT-256/0.7 | ```deit_256``` | 0.7 | 76.532 | 93.118 | 1.3G | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ebda4114758f44d78bc0/?dl=1) |
-| DynamicViT-384/0.7 | ```deit_small``` | 0.7 | 79.316 | 94.676 | 2.9G | [Google Drive](https://drive.google.com/file/d/1H5kHHagdqo4emk9CgjfA7DA62XJr8Yc1/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/58461f395c8f4829be85/?dl=1)|
-| DynamicViT-LV-S/0.5 | ```lvvit_s``` | 0.5 | 81.970 | 95.756 | 3.7G | [Google Drive](https://drive.google.com/file/d/1kPe3MhtYHNdG7natrU20xcAqodO6-Z58/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/9d62a51e6fbb45c38a31/?dl=1) |
-| DynamicViT-LV-S/0.7 | ```lvvit_s``` | 0.7 | 83.076 | 96.252 | 4.6G | [Google Drive](https://drive.google.com/file/d/1dNloEsuEiTi592SdM_ELC36kOJ7aaF-3/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/abe3e31af253476ea628/?dl=1)|
-| DynamicViT-LV-M/0.7 | ```lvvit_m``` | 0.7 | 83.816 | 96.584 | 8.5G | [Google Drive](https://drive.google.com/file/d/1dNab1B5ZOTVNpnpO6H1TsXKFM8BAlA3I/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/5a1c519a39214fa6bc67/?dl=1) |
+| DynamicViT-256/0.7 | ```deit-256``` | 0.7 | 76.53 | 93.12 | 1.3G | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ebda4114758f44d78bc0/?dl=1) |
+| DynamicViT-384/0.7 | ```deit-s``` | 0.7 | 79.32 | 94.68 | 2.9G | [Google Drive](https://drive.google.com/file/d/1H5kHHagdqo4emk9CgjfA7DA62XJr8Yc1/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/58461f395c8f4829be85/?dl=1)|
+| DynamicViT-LV-S/0.5 | ```lvvit-s``` | 0.5 | 81.97 | 95.76 | 3.7G | [Google Drive](https://drive.google.com/file/d/1kPe3MhtYHNdG7natrU20xcAqodO6-Z58/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/9d62a51e6fbb45c38a31/?dl=1) |
+| DynamicViT-LV-S/0.7 | ```lvvit-s``` | 0.7 | 83.08 | 96.25 | 4.6G | [Google Drive](https://drive.google.com/file/d/1dNloEsuEiTi592SdM_ELC36kOJ7aaF-3/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/abe3e31af253476ea628/?dl=1)|
+| DynamicViT-LV-M/0.7 | ```lvvit-m``` | 0.7 | 83.82 | 96.58 | 8.5G | [Google Drive](https://drive.google.com/file/d/1dNab1B5ZOTVNpnpO6H1TsXKFM8BAlA3I/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/5a1c519a39214fa6bc67/?dl=1) |
+
+---
+
+**🔥Updates:** We provide our DynamicCNN and DynamicSwin models pretrained on ImageNet:
+
+| name              | model            | rho  | acc@1 | acc@5 | FLOPs | url                                                          |
+| ----------------- | ---------------- | ---- | ----- | ----- | ----- | ------------------------------------------------------------ |
+| DynamicCNN-T/0.7  | ```convnext-t``` | 0.7  | 81.59 | 95.72 | 3.6G  | [Google Drive](https://drive.google.com/file/d/1Jdp5Xi5E3teBm6zfXqAE681XiszrwqCe/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/95b2daf7593a42f48baa/?dl=1) |
+| DynamicCNN-T/0.9  | ```convnext-t``` | 0.9  | 82.06 | 95.89 | 3.9G  | [Google Drive](https://drive.google.com/file/d/1AHh4kQ_zecKhDzm4bvcZxdl0SoJA3K4Q/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/030c6b8268104c16a666/?dl=1) |
+| DynamicCNN-S/0.7  | ```convnext-s``` | 0.7  | 82.57 | 96.29 | 5.8G  | [Google Drive](https://drive.google.com/file/d/155I0ixZzLFLn9xqZtQML5lXt0QWiQaak/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/293972cc7d8c4adaac23/?dl=1) |
+| DynamicCNN-S/0.9  | ```convnext-s``` | 0.9  | 83.12 | 96.42 | 6.8G  | [Google Drive](https://drive.google.com/file/d/1xFvhSXua2w2m1tr3WFA_d8MH3wEGgRhN/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/64c4ed5ab02d45998bf6/?dl=1) |
+| DynamicCNN-B/0.7  | ```convnext-b``` | 0.7  | 83.45 | 96.56 | 10.2G | [Google Drive](https://drive.google.com/file/d/1epwmGKOEfqjU-WITgrB9VXTWhCu6pcgG/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/1e3a861f272142c38bbc/?dl=1) |
+| DynamicCNN-B/0.9  | ```convnext-b``` | 0.9  | 83.96 | 96.76 | 11.9G | [Google Drive](https://drive.google.com/file/d/1lQLXnxETK6hpsx2Tcv3q1HtRjLI21epl/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/9b4c8df7b30d410bba75/?dl=1) |
+| DynamicSwin-T/0.7 | ```swin-t```     | 0.7  | 80.91 | 95.42 | 4.0G  | [Google Drive](https://drive.google.com/file/d/1BFlCvXedgttyj8n9smcNphE7NLOy99ig/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/6a3d0de592f04d77a2fa/?dl=1) |
+| DynamicSwin-S/0.7 | ```swin-s```     | 0.7  | 83.21 | 96.33 | 6.9G  | [Google Drive](https://drive.google.com/file/d/1gveNkt5aCzjb5CX_DaGq_XJRvvxruxmy/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/86b58132f354495590d0/?dl=1) |
+| DynamicSwin-B/0.7 | ```swin-b```     | 0.7  | 83.43 | 96.45 | 12.1G | [Google Drive](https://drive.google.com/file/d/1sJctKZxdIH0zHwTekWmmCns_1AOeFzeN/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ea260248adc040929970/?dl=1) |
 
 ## Usage
 
 ### Requirements
 
-- torch>=1.7.0
-- torchvision>=0.8.1
-- timm==0.4.5
+- torch>=1.8.0
+- torchvision>=0.9.0
+- timm==0.3.2
+- tensorboardX
+- six
+- fvcore
 
 **Data preparation**: download and extract ImageNet images from http://image-net.org/. The directory structure should be
 
@@ -52,14 +79,15 @@ We provide our DynamicViT models pretrained on ImageNet:
 │  ├── ......
 ```
 
-**Model preparation**: download pre-trained DeiT and LV-ViT models for training DynamicViT:
-| model | url |
-| --- | --- | 
-| DeiT-Small | [link](https://dl.fbaipublicfiles.com/deit/deit_small_patch16_224-cd65a155.pth) |
-| LVViT-S | [Google Drive](https://drive.google.com/file/d/1OSQ3l1yoz5YbsvHy3VjLoipR4jFHFOIS/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/544d651ec2a14da0a37c/?dl=1) |
-| LVViT-M | [Google Drive](https://drive.google.com/file/d/1iZc6d27EuEnlfUpJoNhsZEkt6GVgPy7-/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/c690596b7ead4813ad0b/?dl=1) |
+**Model preparation**: download pre-trained models if necessary:
 
-Since the original links of LVViT models are not available now ([#4](https://github.com/raoyongming/DynamicViT/issues/4)), we provide the models used in our experiments on Google Drive and Tsinghua Cloud.
+| model | url | model | url |
+| --- | --- | --- | --- |
+| DeiT-Small | [link](https://dl.fbaipublicfiles.com/deit/deit_small_patch16_224-cd65a155.pth) | LVViT-S | [link](https://github.com/zihangJiang/TokenLabeling/releases/download/1.0/lvvit_s-26M-224-83.3.pth.tar) |
+| DeiT-Base | [link](https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth) | LVViT-M | [link](https://github.com/zihangJiang/TokenLabeling/releases/download/1.0/lvvit_m-56M-224-84.0.pth.tar) |
+| ConvNeXt-T | [link](https://dl.fbaipublicfiles.com/convnext/convnext_tiny_1k_224_ema.pth) | Swin-T | [link](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth) |
+| ConvNeXt-S | [link](https://dl.fbaipublicfiles.com/convnext/convnext_small_1k_224_ema.pth) | Swin-S | [link](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth) |
+| ConvNeXt-B | [link](https://dl.fbaipublicfiles.com/convnext/convnext_base_1k_224_ema.pth) | Swin-B | [link](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224.pth) |
 
 
 ### Demo
@@ -81,33 +109,134 @@ To run the demo, you need to install ```matplotlib```.
 To evaluate a pre-trained DynamicViT model on the ImageNet validation set with a single GPU, run:
 
 ```
-python infer.py --data-path /path/to/ILSVRC2012/ --arch arch_name --model-path /path/to/model --base_rate 0.7 
+python infer.py --data_path /path/to/ILSVRC2012/ --model model_name \
+--model_path /path/to/model --base_rate 0.7 
 ```
 
 
 ### Training
 
-To train DynamicViT models on ImageNet, run:
+To train Dynamic Spatial Sparsification models on ImageNet, run:
 
-DeiT-small
-```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_deit-small --arch deit_small --input-size 224 --batch-size 96 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
-```
+(You can train models with different keeping ratio by adjusting ```base_rate```. )
 
-LV-ViT-S
+**DeiT-S**
+
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-s --arch lvvit_s --input-size 224 --batch-size 64 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-s --model deit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
 ```
 
-LV-ViT-M
+**DeiT-B**
+
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main_dynamic_vit.py  --output_dir logs/dynamic-vit_lvvit-m --arch lvvit_m --input-size 224 --batch-size 48 --data-path /path/to/ILSVRC2012/ --epochs 30 --dist-eval --distill --base_rate 0.7
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-b --model deit-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
 ```
 
-You can train models with different keeping ratio by adjusting ```base_rate```. DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy compared to 30 epochs). 
+**LV-ViT-S**
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-s --model lvvit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+```
+
+**LV-ViT-M**
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-m --model lvvit-m --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+```
+
+DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy compared to 30 epochs).
+
+**ConvNeXt-T**
+
+Train on 8 GPUs: 
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_conv-t --model convnext-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-t --model convnext-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+```
+
+**ConvNeXt-S**
+
+Train on 8 GPUs: 
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_conv-s --model convnext-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-s --model convnext-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+```
+
+**ConvNeXt-B**
+
+Train on 8 GPUs: 
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_conv-b --model convnext-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-b --model convnext-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
+```
+
+**Swin-T**
+
+Train on 8 GPUs:
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_swin-t --model swin-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-t --model swin-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+```
+
+**Swin-S**
+
+Train on 8 GPUs: 
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_swin-s --model swin-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-s --model swin-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+```
+
+**Swin-B**
+
+Train on 8 GPUs: 
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamic_swin-b --model swin-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 4 --lr_scale 0.2
+```
+
+Train on 4 8-GPU nodes:
+
+```
+python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-b --model swin-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
+```
 
 ## License
+
 MIT License
+
+## Acknowledgements
+
+Our code is based on [pytorch-image-models](https://github.com/rwightman/pytorch-image-models), [DeiT](https://github.com/facebookresearch/deit), [LV-ViT](https://github.com/zihangJiang/TokenLabeling), [ConvNeXt](https://github.com/facebookresearch/ConvNeXt) and [Swin-Transformer](https://github.com/microsoft/Swin-Transformer).
 
 ## Citation
 If you find our work useful in your research, please consider citing:
@@ -118,4 +247,8 @@ If you find our work useful in your research, please consider citing:
   booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
   year = {2021}
 }
+```
+
+```
+
 ```

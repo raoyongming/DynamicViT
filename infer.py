@@ -20,29 +20,29 @@ from timm.utils import NativeScaler, get_state_dict, ModelEma
 
 from datasets import build_dataset
 from engine import train_one_epoch, evaluate
-from losses import DistillationLoss
 from samplers import RASampler
 from functools import partial
 
 
-from vit import VisionTransformerDiffPruning
-from lvvit import LVViTDiffPruning
-
+from models.dyvit import VisionTransformerDiffPruning
+from models.dylvvit import LVViTDiffPruning
+from models.dyconvnext import AdaConvNeXt
+from models.dyswin import AdaSwinTransformer
+import utils
 
 def get_args_parser():
     parser = argparse.ArgumentParser('DeiT training and evaluation script', add_help=False)
-    parser.add_argument('--batch-size', default=128, type=int)
-    parser.add_argument('--arch', default='deit_small', type=str, help='Name of model to train')
-    parser.add_argument('--input-size', default=224, type=int, help='images input size')
-    parser.add_argument('--data-path', default='/datasets01/imagenet_full_size/061417/', type=str,
+    parser.add_argument('--batch_size', default=128, type=int)
+    parser.add_argument('--model', default='deit_small', type=str, help='Name of model to train')
+    parser.add_argument('--input_size', default=224, type=int, help='images input size')
+    parser.add_argument('--data_path', default='/datasets01/imagenet_full_size/061417/', type=str,
                         help='dataset path')
-    parser.add_argument('--data-set', default='IMNET', choices=['CIFAR', 'IMNET', 'INAT', 'INAT19'],
+    parser.add_argument('--data_set', default='IMNET', choices=['CIFAR', 'IMNET', 'INAT', 'INAT19'],
                         type=str, help='Image Net dataset path')
-    parser.add_argument('--inat-category', default='name',
-                        choices=['kingdom', 'phylum', 'class', 'order', 'supercategory', 'family', 'genus', 'name'],
-                        type=str, help='semantic granularity')
+    parser.add_argument('--imagenet_default_mean_and_std', type=utils.str2bool, default=True)
     parser.add_argument('--seed', default=0, type=int)
-    parser.add_argument('--model-path', default='', help='resume from checkpoint')
+    parser.add_argument('--model_path', default='', help='resume from checkpoint')
+    parser.add_argument('--crop_pct', type=float, default=None)
     parser.add_argument('--num_workers', default=10, type=int)
     parser.add_argument('--pin-mem', action='store_true',
                         help='Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.')
@@ -68,41 +68,95 @@ def main(args):
     )
 
     base_rate = args.base_rate
-    KEEP_RATE = [base_rate, base_rate ** 2, base_rate ** 3]
+    KEEP_RATE1 = [base_rate, base_rate ** 2, base_rate ** 3]
+    KEEP_RATE2 = [base_rate, base_rate - 0.2, base_rate - 0.4]
 
-    if args.arch == 'deit_small':
+    print(f"Creating model: {args.model}")
+
+    if args.model == 'deit-s':
         PRUNING_LOC = [3,6,9] 
-        print(f"Creating model: {args.arch}")
-        print('token_ratio =', KEEP_RATE, 'at layer', PRUNING_LOC)
+        print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)
         model = VisionTransformerDiffPruning(
             patch_size=16, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4, qkv_bias=True, 
-            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE
+            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
             )
-    elif args.arch == 'deit_256':
+    elif args.model == 'deit-256':
         PRUNING_LOC = [3,6,9] 
-        print(f"Creating model: {args.arch}")
-        print('token_ratio =', KEEP_RATE, 'at layer', PRUNING_LOC)
+        print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)
         model = VisionTransformerDiffPruning(
             patch_size=16, embed_dim=256, depth=12, num_heads=4, mlp_ratio=4, qkv_bias=True, 
-            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE
+            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
             )
-    elif args.arch == 'lvvit_s':
+    elif args.model == 'lvvit-s':
         PRUNING_LOC = [4,8,12] 
-        print(f"Creating model: {args.arch}")
-        print('token_ratio =', KEEP_RATE, 'at layer', PRUNING_LOC)
+        print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)
         model = LVViTDiffPruning(
             patch_size=16, embed_dim=384, depth=16, num_heads=6, mlp_ratio=3.,
             p_emb='4_2',skip_lam=2., return_dense=True,mix_token=True,
-            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE
+            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
         )
-    elif args.arch == 'lvvit_m':
+    elif args.model == 'lvvit-m':
         PRUNING_LOC = [5,10,15] 
-        print(f"Creating model: {args.arch}")
-        print('token_ratio =', KEEP_RATE, 'at layer', PRUNING_LOC)
+        print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)
         model = LVViTDiffPruning(
             patch_size=16, embed_dim=512, depth=20, num_heads=8, mlp_ratio=3.,
             p_emb='4_2',skip_lam=2., return_dense=True,mix_token=True,
-            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE
+            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
+        )
+    elif args.model == 'convnext-t':
+        PRUNING_LOC = [1,2,3]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaConvNeXt(
+            sparse_ratio=KEEP_RATE2, pruning_loc=PRUNING_LOC
+        )
+    elif args.model == 'convnext-s':
+        PRUNING_LOC = [3,6,9]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaConvNeXt(
+            sparse_ratio=KEEP_RATE2, pruning_loc=PRUNING_LOC, 
+            depths=[3, 3, 27, 3]
+        )
+    elif args.model == 'convnext-b':
+        PRUNING_LOC = [3,6,9]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaConvNeXt(
+            sparse_ratio=KEEP_RATE2, pruning_loc=PRUNING_LOC, 
+            depths=[3, 3, 27, 3], dims=[128, 256, 512, 1024]
+        )
+    elif args.model == 'swin-t':
+        PRUNING_LOC = [1,2,3]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaSwinTransformer(
+            embed_dim=96,
+            depths=[2, 2, 6, 2],
+            num_heads=[3, 6, 12, 24],
+            window_size=7,
+            drop_rate=0.0,
+            pruning_loc=[1,2,3], sparse_ratio=KEEP_RATE2
+        )
+    elif args.model == 'swin-s':
+        PRUNING_LOC = [2,4,6]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaSwinTransformer(
+            embed_dim=96,
+            depths=[2, 2, 18, 2],
+            num_heads=[3, 6, 12, 24],
+            window_size=7,
+            drop_rate=0.0,
+            drop_path_rate=args.drop_path,
+            pruning_loc=[2,4,6], sparse_ratio=KEEP_RATE2
+        )
+    elif args.model == 'swin-b':
+        PRUNING_LOC = [2,4,6]
+        print('token_ratio =', KEEP_RATE2, 'at layer', PRUNING_LOC)
+        model = AdaSwinTransformer(
+            embed_dim=128,
+            depths=[2, 2, 18, 2],
+            num_heads=[4, 8, 16, 32],
+            window_size=7,
+            drop_rate=0.0,
+            drop_path_rate=args.drop_path,
+            pruning_loc=[2,4,6], sparse_ratio=KEEP_RATE2
         )
     else:
         raise NotImplementedError

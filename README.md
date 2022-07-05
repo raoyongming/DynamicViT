@@ -157,7 +157,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-t --model convnext-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-t --model convnext-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
 ```
 
 **ConvNeXt-S**
@@ -171,7 +171,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-s --model convnext-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-s --model convnext-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
 ```
 
 **ConvNeXt-B**
@@ -185,7 +185,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-b --model convnext-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_conv-b --model convnext-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
 ```
 
 **Swin-T**
@@ -199,7 +199,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-t --model swin-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-t --model swin-t --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
 ```
 
 **Swin-S**
@@ -213,7 +213,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-s --model swin-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-s --model swin-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.2 --update_freq 1 --lr_scale 0.2
 ```
 
 **Swin-B**
@@ -227,7 +227,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output
 Train on 4 8-GPU nodes:
 
 ```
-python run_with submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-b --model swin-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
+python run_with_submitit.py --nodes 4 --ngpus 8 --output_dir logs/dynamic_swin-b --model swin-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 120 --base_rate 0.7 --lr 4e-3 --drop_path 0.5 --update_freq 1 --lr_scale 0.2
 ```
 
 ## License

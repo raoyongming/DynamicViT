@@ -4,7 +4,7 @@ This repository contains PyTorch implementation for DynamicViT (NeurIPS 2021).
 
 **DynamicViT** is a dynamic token sparsification framework to prune redundant tokens in vision transformers progressively and dynamically based on the input. Our method can reduces over **30%** FLOPs and improves the throughput by over **40%** while the drop of accuracy is within **0.5%** for various vision transformers.
 
-[[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv (NeurIPS 2021 paper)]](https://arxiv.org/abs/2106.02034)
+[[Project Page]](https://dynamicvit.ivg-research.xyz/) [[arXiv (NeurIPS 2021)]](https://arxiv.org/abs/2106.02034)
 
 ### 🔥Updates
 
@@ -253,7 +253,6 @@ If you find our work useful in your research, please consider citing:
 @article{rao2022dynamicvit,
   title={Dynamic Spatial Sparsification for Efficient Vision Transformers and Convolutional Neural Networks},
   author={Rao, Yongming and Liu, Zuyan and Zhao, Wenliang and Zhou, Jie and Lu, Jiwen},
-  journal={arXiv preprint},
+  journal={arXiv preprint arXiv:2207.01580},
   year={2022}
-}
 ```

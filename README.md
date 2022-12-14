@@ -28,11 +28,11 @@ We extend our method to more **network architectures** (i.e., ConvNeXt and Swin 
 We provide our DynamicViT models pretrained on ImageNet:
 | name | model | rho | acc@1 | acc@5 | FLOPs | url |
 | --- | --- | --- | --- | --- | --- | --- |
-| DynamicViT-256/0.7 | ```deit-256``` | 0.7 | 76.53 | 93.12 | 1.3G | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ebda4114758f44d78bc0/?dl=1) |
-| DynamicViT-384/0.7 | ```deit-s``` | 0.7 | 79.32 | 94.68 | 2.9G | [Google Drive](https://drive.google.com/file/d/1H5kHHagdqo4emk9CgjfA7DA62XJr8Yc1/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/58461f395c8f4829be85/?dl=1)|
-| DynamicViT-LV-S/0.5 | ```lvvit-s``` | 0.5 | 81.97 | 95.76 | 3.7G | [Google Drive](https://drive.google.com/file/d/1kPe3MhtYHNdG7natrU20xcAqodO6-Z58/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/9d62a51e6fbb45c38a31/?dl=1) |
-| DynamicViT-LV-S/0.7 | ```lvvit-s``` | 0.7 | 83.08 | 96.25 | 4.6G | [Google Drive](https://drive.google.com/file/d/1dNloEsuEiTi592SdM_ELC36kOJ7aaF-3/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/abe3e31af253476ea628/?dl=1)|
-| DynamicViT-LV-M/0.7 | ```lvvit-m``` | 0.7 | 83.82 | 96.58 | 8.5G | [Google Drive](https://drive.google.com/file/d/1dNab1B5ZOTVNpnpO6H1TsXKFM8BAlA3I/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/5a1c519a39214fa6bc67/?dl=1) |
+| DynamicViT-DeiT-256/0.7 | ```deit-256``` | 0.7 | 76.53 | 93.12 | 1.3G | [Google Drive](https://drive.google.com/file/d/1fpdTNRZtGOW25UwOadj1iUdjqmu88WkO/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/ebda4114758f44d78bc0/?dl=1) |
+| DynamicViT-DeiT-S/0.7 | ```deit-s``` | 0.7 | 79.32 | 94.68 | 2.9G | [Google Drive](https://drive.google.com/file/d/1H5kHHagdqo4emk9CgjfA7DA62XJr8Yc1/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/58461f395c8f4829be85/?dl=1)|
+| DynamicViT-LVViT-S/0.5 | ```lvvit-s``` | 0.5 | 81.97 | 95.76 | 3.7G | [Google Drive](https://drive.google.com/file/d/1kPe3MhtYHNdG7natrU20xcAqodO6-Z58/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/9d62a51e6fbb45c38a31/?dl=1) |
+| DynamicViT-LVViT-S/0.7 | ```lvvit-s``` | 0.7 | 83.08 | 96.25 | 4.6G | [Google Drive](https://drive.google.com/file/d/1dNloEsuEiTi592SdM_ELC36kOJ7aaF-3/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/abe3e31af253476ea628/?dl=1)|
+| DynamicViT-LVViT-M/0.7 | ```lvvit-m``` | 0.7 | 83.82 | 96.58 | 8.5G | [Google Drive](https://drive.google.com/file/d/1dNab1B5ZOTVNpnpO6H1TsXKFM8BAlA3I/view?usp=sharing) / [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/5a1c519a39214fa6bc67/?dl=1) |
 
 ---
 
@@ -123,25 +123,25 @@ To train Dynamic Spatial Sparsification models on ImageNet, run:
 **DeiT-S**
 
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-s --model deit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-s --model deit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3 --warmup_epochs 5
 ```
 
 **DeiT-B**
 
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-b --model deit-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_deit-b --model deit-b --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3 --warmup_epochs 5 --drop_path 0.2
 ```
 
 **LV-ViT-S**
 
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-s --model lvvit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-s --model lvvit-s --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3 --warmup_epochs 5
 ```
 
 **LV-ViT-M**
 
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-m --model lvvit-m --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3
+python -m torch.distributed.launch --nproc_per_node=8 --use_env main.py --output_dir logs/dynamicvit_lvvit-m --model lvvit-m --input_size 224 --batch_size 128 --data_path /path/to/ILSVRC2012/ --epochs 30 --base_rate 0.7 --lr 1e-3 --warmup_epochs 5
 ```
 
 DynamicViT can also achieve comparable performance with only 15 epochs training (around 0.1% lower accuracy compared to 30 epochs).

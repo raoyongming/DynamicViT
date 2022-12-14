@@ -87,6 +87,13 @@ def main(args):
             patch_size=16, embed_dim=256, depth=12, num_heads=4, mlp_ratio=4, qkv_bias=True, 
             pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
             )
+    elif args.model == 'deit-b':
+        PRUNING_LOC = [3,6,9] 
+        print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)
+        model = VisionTransformerDiffPruning(
+            patch_size=16, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True, 
+            pruning_loc=PRUNING_LOC, token_ratio=KEEP_RATE1
+            )
     elif args.model == 'lvvit-s':
         PRUNING_LOC = [4,8,12] 
         print('token_ratio =', KEEP_RATE1, 'at layer', PRUNING_LOC)

@@ -188,6 +188,7 @@ def get_args_parser():
     parser.add_argument('--throughput', action='store_true')
     parser.add_argument('--lr_scale', type=float, default=0.01)
     parser.add_argument('--base_rate', type=float, default='0.9')
+    parser.add_argument('--ratio_weight', type=float, default='2.0')
 
     return parser
 
@@ -421,7 +422,7 @@ def main(args):
         )
     elif 'deit' in args.model:
         criterion = DistillDiffPruningLoss_dynamic(
-            teacher_model, criterion, clf_weight=1.0, keep_ratio=KEEP_RATE, mse_token=True, ratio_weight=2.0, distill_weight=0.5
+            teacher_model, criterion, clf_weight=1.0, keep_ratio=KEEP_RATE, mse_token=True, ratio_weight=args.ratio_weight, distill_weight=0.5
         )
 
     model.eval()

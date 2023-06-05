@@ -8,9 +8,9 @@ This repository contains PyTorch implementation for DynamicViT (NeurIPS 2021).
 
 ### 🔥Updates
 
-We extend our method to more **network architectures** (i.e., ConvNeXt and Swin Transformers) and more **tasks** (i.e., object detection and semantic segmentation) with an improved ***dynamic spatial sparsification*** framework. Please refer to the extended version of our paper for details.
+We extend our method to more **network architectures** (i.e., ConvNeXt and Swin Transformers) and more **tasks** (i.e., object detection and semantic segmentation) with an improved ***dynamic spatial sparsification*** framework. Please refer to the extended version of our paper for details. The extended version has been accepted by T-PAMI. 
 
-[[arXiv (Extended Version)]](https://arxiv.org/abs/2207.01580)
+[[arXiv (T-PAMI, Journal Version)]](https://arxiv.org/abs/2207.01580)
 
 ### Image Examples
 
